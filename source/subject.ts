@@ -1,4 +1,4 @@
-export interface subject {
+export interface Subject {
     name: string;
     difficultyCoefficient: number;
     difficultyLevel: string;

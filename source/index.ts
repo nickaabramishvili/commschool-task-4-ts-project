@@ -1,13 +1,13 @@
-import { student } from "./students";
+import { Student } from "./students";
 import { Teacher } from "./teachers";
-import { subject } from "./subject";
+import { Subject } from "./subject";
 
 interface schoolClass {
     classNumber: number;
-    studentsList: student[];
+    studentsList: Student[];
     studentsCount: number;
 }
-const subjects: subject[] = [
+const subjects: Subject[] = [
     { name: "mathematics", difficultyCoefficient: 8, difficultyLevel: "empty", learnedFromClass: 4 },
     { name: "physics", difficultyCoefficient: 9, difficultyLevel: "empty", learnedFromClass: 5 },
     { name: "biology", difficultyCoefficient: 7, difficultyLevel: "empty", learnedFromClass: 5 },
@@ -175,7 +175,7 @@ const teachers: Teacher[] = [
         ],
     },
 ];
-const students: student[] = [
+const students: Student[] = [
     {
         id: 1,
         firstName: "nino",
@@ -649,7 +649,7 @@ const schoolClassses: schoolClass[] = [
 //   ასწავლის ბუნებას, კლასების სიაში უნდა მოვძებნოთ ის კლასი,რომელშიც
 //   ჩვენი მოსწავლეა და დავამატოთ მაგ კლასის სიაში. ki
 
-function func1(student: student, teachers: Teacher) {
+function func1(student: Student, teachers: Teacher) {
     if (student.subjects[0].name === teachers.subjects[0].name) {
         teachers.classesTeaching[0].studentsList.push(student.firstName);
     }
@@ -659,7 +659,7 @@ func1(students[0], teachers[4]);
 
 // დავწეროთ ფუნქცია, რომელიც პარამეტრად მიიღებს მოსწავლეს და საგანს და ქულას,
 //  მოსწავლეს ამ გადაცემულ საგანში ჩაეწერება შესაბამისად გადაცემული ქულა.
-function func2(student: student, subject: subject, grade: number) {
+function func2(student: Student, subject: Subject, grade: number) {
     if (student.subjects[0].name === subject.name) {
         student.subjects[0].grade = grade;
         console.log(student.subjects[0].grade);
@@ -671,7 +671,7 @@ func2(students[0], subjects[5], 10);
 // დავწეროთ ფუნქცია, რომელიც დაამატებს მასწავლებელს, მასწავლებელი დაემატება
 // მასწავლებელთა სიაში, თუ ასწავლის ისეთ საგანს, რომელიც
 // არ გვაქ საგნების სიაში, მოცემული საგანი დაემატება საგნების სიას.
-function func3(teacher: Teacher, teachers: Teacher[], subjects: subject[]) {
+function func3(teacher: Teacher, teachers: Teacher[], subjects: Subject[]) {
     teachers.push(teacher);
     let isSubjectTeached = subjects.every((el) => el.name === teacher.subjects[0].name);
     if (!isSubjectTeached) {
@@ -711,7 +711,7 @@ func3(
 // დავწეროთ ფუნქცია, რომელსაც გადაეცემა მოსწავლე და დააბრუნებს აბარებს
 // თუ არა მოსწავლე ყველა საგანს, თუ საგანში ქულა 6-ზე მეტი ყავს
 // დაწეროს რომ აბარებს, წინააღმდეგ შემტხვევაში რომ იჭრება
-function func4(student: student) {
+function func4(student: Student) {
     let studentPassesAllExams = student.subjects.every((el) => el.grade > 6);
     studentPassesAllExams ? console.log("student passes all exams") : console.log("student did not passed all exams");
 }
@@ -724,7 +724,7 @@ func4(students[11]);
 // მინიჭება მოხდება იმისდა მიხედვით თუ  რამდენი არის კოეფიციენტი, 1-დან 4-მდე იქნება Easy,
 // 4-დან 8-მდე Average და 8-დან 10-ის ჩათვლით Hard.
 
-function func5(subject: subject[]) {
+function func5(subject: Subject[]) {
     for (let i = 0; i < subject.length; i++) {
         let elCoefficient: number;
 
@@ -783,9 +783,9 @@ person<Teacher>(teachers[0]);
 //  სირთულის კოეფიციენტს, რომელსაც სწავლობს
 console.log("task 2-2 ");
 
-type subjectOrStudent = subject | student;
+type subjectOrStudent = Subject | Student;
 
-function studentOrSubject<subjectOrStudent>(param: subject | student) {
+function studentOrSubject<subjectOrStudent>(param: Subject | Student) {
     if ("learnedFromClass" in param) {
         students.forEach((studentEl) => {
             studentEl.subjects.forEach((studentSubjEl) => {
@@ -806,4 +806,4 @@ function studentOrSubject<subjectOrStudent>(param: subject | student) {
         console.log("param is student");
     }
 }
-studentOrSubject<student>(students[0]);
+studentOrSubject<Student>(students[0]);
