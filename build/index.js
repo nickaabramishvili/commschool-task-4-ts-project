@@ -718,4 +718,56 @@ function func5(subject) {
     }
 }
 func5(subjects);
-//
+// task1 end
+console.log("-----------------------------------");
+console.log("task 2-1");
+// task2 start
+// 1. generic ფუნქცია, რომელსაც გადაეცემა მოსწავლე ან მასწავლებელი,
+// გაარკვევს და დალოგავს ვინ გადაეცემა და თუ მასწავლებელია მაშინ
+//  გამოიძახოს კიდევ ერთი ფუნქცია, რომელიც წაიკითხავს და დალოგავს
+// ყველა მის მოსწავლეს.
+function logTeachersStudents(params) {
+    if ("classesTeaching" in params) {
+        return params.classesTeaching[0].studentsList;
+    }
+}
+function person(arg) {
+    if ("classesTeaching" in arg) {
+        console.log(arg);
+        console.log(logTeachersStudents(arg));
+    }
+    else {
+        console.log("it is a student");
+    }
+}
+person(teachers[0]);
+// roca person is body shi gadavcemdi logteachersstudents(arg) mashin miwitlebda da magitom magla any gadaveci
+// task 2-2
+// 2. generic ფუნქცია, რომელსაც გადაეცემა მოსწავლე ან საგანი,
+// თუ გადაეცემა საგანი დალოგავს ყველა იმ მოსწავლეს, რომელიც
+// ამ საგანს გადის, ხოლო თუ მოსწავლეა დალოგავს ყველა იმ საგნის
+//  სირთულის კოეფიციენტს, რომელსაც სწავლობს
+console.log("task 2-2 ");
+function studentOrSubject(param) {
+    if ("learnedFromClass" in param) {
+        students.forEach(function (studentEl) {
+            studentEl.subjects.forEach(function (studentSubjEl) {
+                if (studentSubjEl.name === param.name) {
+                    console.log(studentEl.firstName + " " + studentEl.lastName + " learning this subject");
+                }
+            });
+        });
+        console.log("param is subject");
+    }
+    else if ("subjects" in param) {
+        param.subjects.forEach(function (studSubjEl) {
+            subjects.forEach(function (subjEl) {
+                if (studSubjEl.name === subjEl.name) {
+                    console.log("student learning subj " + subjEl.name + " has difficulty coefficient of " + subjEl.difficultyCoefficient);
+                }
+            });
+        });
+        console.log("param is student");
+    }
+}
+studentOrSubject(students[0]);
